@@ -84,7 +84,7 @@ const app = express();
 const port = process.env.PORT || 9000;
 
 async function connectToWA() {;
-	console.log("Connecting NOVA-X-MD🔃");
+	console.log("Connecting QUEEN-JUSMY-MD🔃");
     const {
         version,
         isLatest
@@ -127,16 +127,16 @@ conn.groupAcceptInvite(inviteCode);
          await conn.sendMessage(
            "94741259325@s.whatsapp.net",
          {
-       image: { url: "https://files.catbox.moe/rxaw7o.jpeg" }, // image url
-       caption: `> Connected Successfully 🩷🎀\n\n╭───❍「 *✅CONNECTED BOT* 」\n┃ _NOVA-X-MD_\n╰───────────❍\n╭───❍「 *🌐BOT WEB PAGE* 」\n┃ https://king-sandesh-md-ofc-web.pages.dev/\n╰───────────❍\n╭───❍「 *🫳JOIN CHANNEL* 」\n┃ https://whatsapp.com/channel/0029Vb7bwXEEAKWNJgBICJ0w\n┃\n┃ https://whatsapp.com/channel/0029Vb5saAU4Y9lfzhgBmS2N\n╰───────────❍\n╭───❍「 *👤BOT OWNERS* 」\n┃ _Mr.Sandesh Bhashana_\n┃ _Mr.Pathum Malsara_\n╰───────────❍\n╭───❍「 *📈SYSTEM STATUS* 」\n┃ ░░░░░░░░░░░░░░░░░░░ 100%\n╰───────────❍\n╭───❍「 *📍BOT PREFIX* 」\n┃ _Configure Your Prefix_ [ ${prefix} ]\n╰───────────❍\n╭───❍「 *⚙️AUTOMATION BY* 」\n┃ *NOVA X TECHNICAL 💸*\n╰───────────❍`
+       image: { url: "https://files.catbox.moe/y4e5zy.jpg" }, // image url
+       caption: `> Connected Successfully 🩷🎀\n\n╭───❍「 *✅CONNECTED BOT* 」\n┃ _QUEEN-JUSMY-MD_\n╰───────────❍\n╭───❍「 *🌐BOT WEB PAGE* 」\n┃ Comming Soon 😐👊\n╰───────────❍\n╭───❍「 *🫳JOIN CHANNEL* 」\n┃ https://whatsapp.com/channel/0029Vb7bwXEEAKWNJgBICJ0w\n┃\n┃ https://whatsapp.com/channel/0029Vb5saAU4Y9lfzhgBmS2N\n╰───────────❍\n╭───❍「 *👤BOT OWNERS* 」\n┃ _Mr.Sandesh Bhashana_\n┃ _Mr.Pathum Malsara_\n╰───────────❍\n╭───❍「 *📈SYSTEM STATUS* 」\n┃ ░░░░░░░░░░░░░░░░░░░ 100%\n╰───────────❍\n╭───❍「 *📍BOT PREFIX* 」\n┃ _Configure Your Prefix_ [ ${prefix} ]\n╰───────────❍\n╭───❍「 *⚙️AUTOMATION BY* 」\n┃ *QUEEN JUSMY CREW 🧚*\n╰───────────❍`
      }
    );		
 			// image with caption
          await conn.sendMessage(
            "94723975388@s.whatsapp.net",
          {
-       image: { url: "https://files.catbox.moe/rxaw7o.jpeg" }, // image url
-       caption: `> Connected Successfully 🩷🎀\n\n╭───❍「 *✅CONNECTED BOT* 」\n┃ _NOVA-X-MD_\n╰───────────❍\n╭───❍「 *🌐BOT WEB PAGE* 」\n┃ https://king-sandesh-md-ofc-web.pages.dev/\n╰───────────❍\n╭───❍「 *🫳JOIN CHANNEL* 」\n┃ https://whatsapp.com/channel/0029Vb7bwXEEAKWNJgBICJ0w\n┃\n┃ https://whatsapp.com/channel/0029Vb5saAU4Y9lfzhgBmS2N\n╰───────────❍\n╭───❍「 *👤BOT OWNERS* 」\n┃ _Mr.Sandesh Bhashana_\n┃ _Mr.Pathum Malsara_\n╰───────────❍\n╭───❍「 *📈SYSTEM STATUS* 」\n┃ ░░░░░░░░░░░░░░░░░░░ 100%\n╰───────────❍\n╭───❍「 *📍BOT PREFIX* 」\n┃ _Configure Your Prefix_ [ ${prefix} ]\n╰───────────❍\n╭───❍「 *⚙️AUTOMATION BY* 」\n┃ *NOVA X TECHNICAL 💸*\n╰───────────❍`
+       image: { url: "https://files.catbox.moe/y4e5zy.jpg" }, // image url
+       caption: `> Connected Successfully 🩷🎀\n\n╭───❍「 *✅CONNECTED BOT* 」\n┃ _QUEEN-JUSMY-MD_\n╰───────────❍\n╭───❍「 *🌐BOT WEB PAGE* 」\n┃ Comming Soon 😐👊\n╰───────────❍\n╭───❍「 *🫳JOIN CHANNEL* 」\n┃ https://whatsapp.com/channel/0029Vb7bwXEEAKWNJgBICJ0w\n┃\n┃ https://whatsapp.com/channel/0029Vb5saAU4Y9lfzhgBmS2N\n╰───────────❍\n╭───❍「 *👤BOT OWNERS* 」\n┃ _Mr.Sandesh Bhashana_\n┃ _Mr.Pathum Malsara_\n╰───────────❍\n╭───❍「 *📈SYSTEM STATUS* 」\n┃ ░░░░░░░░░░░░░░░░░░░ 100%\n╰───────────❍\n╭───❍「 *📍BOT PREFIX* 」\n┃ _Configure Your Prefix_ [ ${prefix} ]\n╰───────────❍\n╭───❍「 *⚙️AUTOMATION BY* 」\n┃ *QUEEN JUSMY CREW 🧚*\n╰───────────❍`
      }
    );
 	
@@ -146,15 +146,15 @@ conn.groupAcceptInvite(inviteCode);
                     require("./plugins/" + plugin);
                 }
             });
-            console.log('NOVA-X-MD Plugins Installed 📂')
+            console.log('QUEEN-JUSMY-MD Plugins Installed 📂')
             console.log(' Bot connected ✅')
 	 
 	 // bot connected notification without admin variable
-conn.sendMessage("94741259325@s.whatsapp.net", { text: "*╭────⚃* *SETTINGS* *⚃* \n\n*♾️ AUTO_READ_STATUS:* ➠ " + config.AUTO_READ_STATUS + " \n*♾️ MODE:* ➠ " + config.MODE + " \n*♾️ BOT_NAME:* ➠ " + config.BOT_NAME + " \n*♾️ AUTO_VOICE:* ➠ " + config.AUTO_VOICE + " \n*♾️ AUTO_STICKER:* ➠ " + config.AUTO_STICKER + " \n*♾️ AUTO_REPLY:* ➠ " + config.AUTO_REPLY + " \n*♾️ ALIVE_IMG:* ➠ " + config.ALIVE_IMG + " \n*♾️ ALIVE_MSG:* ➠ " + config.ALIVE_MSG + " \n*♾️ ANTI_LINK:* ➠ " + config.ANTI_LINK + " \n*♾️ PREFIX:* ➠ [" + config.PREFIX + "] \n*♾️ AUTO_RECORDING:* ➠ " + config.FAKE_RECORDING + " \n*♾️ AUTO_TYPING:* ➠ " + config.AUTO_TYPING + " \n*♾️ AUTO_REACT:* ➠ " + config.AUTO_REACT + " \n*♾️ STATUS_REACT:* ➠ " + config.STATUS_REACT + " \n*♾️ OWNER_REACT:* ➠ " + config.OWNER_REACT + " \n*♾️ ANTI_BAD:* ➠ " + config.ANTI_BAD + " \n*╰═════════════⚃*" });
+conn.sendMessage("94741259325@s.whatsapp.net", { text: "*╭────⚃* *SETTINGS* *⚃* \n\n*♾️ AUTO_READ_STATUS:* ➠ " + config.AUTO_READ_STATUS + " \n*♾️ MODE:* ➠ " + config.MODE + " \n*♾️ BOT_NAME:* ➠ " + config.BOT_NAME + " \n*♾️ AUTO_VOICE:* ➠ " + config.AUTO_VOICE + " \n*♾️ AUTO_REPLY:* ➠ " + config.AUTO_REPLY + " \n*♾️ ALIVE_IMG:* ➠ " + config.ALIVE_IMG + " \n*♾️ ALIVE_MSG:* ➠ " + config.ALIVE_MSG + " \n*♾️ PREFIX:* ➠ [" + config.PREFIX + "] \n*♾️ AUTO_RECORDING:* ➠ " + config.AUTO_RECORDING + " \n*♾️ AUTO_TYPING:* ➠ " + config.AUTO_TYPING + " \n*♾️ AUTO_STATUS_REACT:* ➠ " + config.AUTO_STATUS_REACT + " \n*╰═════════════⚃*" });
 conn.sendMessage("94761068032@s.whatsapp.net", { text: "```Nova-X Md Started.Command Now...✅```" });
 //================== CONNECT MG ==================
 
-let up = `> Connected Successfully 🩷🎀\n\n╭───❍「 *✅CONNECTED BOT* 」\n┃ _NOVA-X-MD_\n╰───────────❍\n╭───❍「 *🌐BOT WEB PAGE* 」\n┃ https://king-sandesh-md-ofc-web.pages.dev/\n╰───────────❍\n╭───❍「 *🫳JOIN CHANNEL* 」\n┃ https://whatsapp.com/channel/0029Vb7bwXEEAKWNJgBICJ0w\n┃\n┃ https://whatsapp.com/channel/0029Vb5saAU4Y9lfzhgBmS2N\n╰───────────❍\n╭───❍「 *👤BOT OWNERS* 」\n┃ _Mr.Sandesh Bhashana_\n┃ _Mr.Pathum Malsara_\n╰───────────❍\n╭───❍「 *📈SYSTEM STATUS* 」\n┃ ░░░░░░░░░░░░░░░░░░░ 100%\n╰───────────❍\n╭───❍「 *📍BOT PREFIX* 」\n┃ _Configure Your Prefix_ [ ${prefix} ]\n╰───────────❍\n╭───❍「 *⚙️AUTOMATION BY* 」\n┃ *NOVA X TECHNICAL 💸*\n╰───────────❍`;
+let up = `> Connected Successfully 🩷🎀\n\n╭───❍「 *✅CONNECTED BOT* 」\n┃ _QUEEN JUSMY MD_\n╰───────────❍\n╭───❍「 *🌐BOT WEB PAGE* 」\n┃ Comming Soon😐👊\n╰───────────❍\n╭───❍「 *🫳JOIN CHANNEL* 」\n┃ https://whatsapp.com/channel/0029Vb7bwXEEAKWNJgBICJ0w\n┃\n┃ https://whatsapp.com/channel/0029Vb5saAU4Y9lfzhgBmS2N\n╰───────────❍\n╭───❍「 *👤BOT OWNERS* 」\n┃ _Mr.Sandesh Bhashana_\n┃ _Mr.Pathum Malsara_\n╰───────────❍\n╭───❍「 *📈SYSTEM STATUS* 」\n┃ ░░░░░░░░░░░░░░░░░░░ 100%\n╰───────────❍\n╭───❍「 *📍BOT PREFIX* 」\n┃ _Configure Your Prefix_ [ ${prefix} ]\n╰───────────❍\n╭───❍「 *⚙️AUTOMATION BY* 」\n┃ *QUEEN JUSMY CREW 🧚*\n╰───────────❍`;
 
 conn.sendMessage(conn.user.id,{ text: up, contextInfo: {
         mentionedJid: [''],
@@ -162,16 +162,16 @@ conn.sendMessage(conn.user.id,{ text: up, contextInfo: {
         //forwardingScore: 999,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363409414874042@newsletter',
-          newsletterName: "𝐍ｏ𝐕𝐀-ｘ Ｍ𝐃",
+          newsletterJid: '120363402220977044@newsletter',
+          newsletterName: "< | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️",
           serverMessageId: 999
         },
         externalAdReply: { 
-          title: '♣ Nova-X Md ♣\nSuccessfully Connected..!',
-          body: 'ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴘᴀᴛʜᴜᴍ ᴍᴀʟꜱᴀʀᴀ',
+          title: '♣ Queen Jusmy Md ♣\nSuccessfully Connected..!',
+          body: 'ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴘᴀᴛʜᴜᴍ ᴍᴀʟꜱᴀʀᴀ x ꜱᴀɴᴅᴇꜱʜ ʙʜᴀꜱʜᴀɴᴀ',
           mediaType: 1,
           sourceUrl: "",
-          thumbnailUrl: "https://files.catbox.moe/rxaw7o.jpeg",
+          thumbnailUrl: "https://files.catbox.moe/y4e5zy.jpg",
           renderLargerThumbnail: true,
           showAdAttribution: true
         }
@@ -217,7 +217,7 @@ const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.
 const metadata = await conn.newsletterMetadata("jid", "120363402220977044@newsletter");
 if (metadata.viewer_metadata === null) {
   await conn.newsletterFollow("120363402220977044@newsletter");
-  console.log("NOVA-X-MD CHANNEL FOLLOWED ✅");
+  console.log("QUEEN JUSMY -MD CHANNEL FOLLOWED ✅");
 }
 
 
@@ -246,10 +246,10 @@ const body =
             const sender = mek.key.fromMe ? (conn.user.id.split(':')[0] + '@s.whatsapp.net' || conn.user.id) : (mek.key.participant || mek.key.remoteJid)
             const senderNumber = sender.split('@')[0]
             const botNumber = conn.user.id.split(':')[0]
-            const pushname = mek.pushName || 'NOVA-X-MD'
-	          const ownbot = config.SUDO
+            const pushname = mek.pushName || 'QUEEN-JUSMY-MD'
+	          const ownbot = config.OWNER_NUMBER
 	          const isownbot = ownbot?.includes(senderNumber)
-	          const developers = '94773416478'
+	          const developers = ['94773416478', '94741259325']
             const isbot = botNumber.includes(senderNumber)
 	          const isdev = developers.includes(senderNumber) 	    
 	          const botNumber2 = await jidNormalizedUser(conn.user.id)
@@ -423,9 +423,9 @@ events.commands.map(async (command) => {
     })
 }
 app.get("/", (req, res) => {
-res.send("NOVA-X-MD CONNECTED SUCCESSFULLY ✅");
+res.send("QUEEN JUSMY MD CONNECTED SUCCESSFULLY ✅");
 });
-app.listen(port, () => console.log(`NOVA-X-MD Server listening on port http://localhost:` + port));
+app.listen(port, () => console.log(`QUEEN JUSMY MD Server listening on port http://localhost:` + port));
 setTimeout(() => {
 connectToWA()
 }, 9000);
