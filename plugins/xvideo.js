@@ -32,7 +32,7 @@ cmd({
     // only show first 5
     const sliced = results.slice(0, 35);
 
-    let textMsg = `🔞 𝐍ᴏᴠᴀ-𝐗 18+ 𝐕ɪᴅᴇ𝐎 𝐒ᴇᴀʀᴄʜ𝐇 📥\n\n`;
+    let textMsg = `🔞 < | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️ 18+ 𝐕ɪᴅᴇ𝐎 𝐒ᴇᴀʀᴄʜ𝐇 📥\n\n`;
     textMsg += `~*Search Results For:*~ ${query}\n\n`;
 
     const sections = [
@@ -48,7 +48,7 @@ cmd({
 
    await conn.sendMessage(m.chat, {
   text: textMsg,
-  footer: "🔞 𝐍ᴏᴠᴀ-x 𝐌ᴅ 𝐗ᴠɪᴅᴇ𝐎 𝐃ᴏᴡɴʟᴏᴀᴅᴇʀ\n\n> ву ѕαη∂єѕн внαѕнαηα χ ραтнυм мαℓѕαяα", 
+  footer: "🔞 < | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️ 𝐗ᴠɪᴅᴇ𝐎 𝐃ᴏᴡɴʟᴏᴀᴅᴇʀ\n\n> ву ѕαη∂єѕн внαѕнαηα χ ραтнυм мαℓѕαяα", 
   title: "𝚂𝙴𝙻𝙴𝙲𝚃 𝙰 𝚅𝙸𝙳𝙴𝙾 𝚃𝙾 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳",
   buttonText: "ＲＥＳＵＬＴＳ",
   sections,
