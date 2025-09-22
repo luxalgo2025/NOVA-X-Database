@@ -190,8 +190,17 @@ conn.sendMessage(conn.user.id,{ text: up, contextInfo: {
     }
   });
   //============================== 
+							  
+//============================== 
+const { startAutoBio } = require("./plugins/autobio"); // export function import
 
+conn.ev.on("connection.update", (update) => {
+  if (update.connection === "open" && config.AUTO_BIO.toLowerCase() === "true") {
+    startAutoBio(conn); // ✅ autobio auto-run
+  }
+});
 
+							  
 conn.ev.on('creds.update', saveCreds)  
 
     conn.ev.on('messages.upsert', async (mek) => {
