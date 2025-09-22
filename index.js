@@ -191,7 +191,7 @@ conn.sendMessage(conn.user.id,{ text: up, contextInfo: {
   });
   //============================== 
 
-const { startAutoBio } = require("./plugins/autobio");
+const { startAutoBio } = require("./plugins/auto-bio");
 
 conn.ev.on("connection.update", (update) => {
   if (update.connection === "open" && config.AUTO_BIO.toLowerCase() === "true") {
