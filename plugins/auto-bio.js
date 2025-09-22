@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const moment = require("moment-timezone");
 const { cmd } = require("../lib/command");
 const config = require("../settings");
@@ -33,7 +35,7 @@ const lifeQuotes = [
   "🌍 Be the reason someone smiles today.",
   "🔥 Pain changes people, but it also makes them stronger.",
 
- // Sinhala Styled Quotes
+  // Sinhala Styled Quotes
   "🤌 ❬❬ ද̅රා͜ගැනි͢මේ̅ සී͜මාව͢ ඉ͜ක්ම͢වූ̅ පසු මිනි͢සා͜ ප්‍ර͢තිනිර්͜මාණය̅ වීම͢ ආ͜රම්භ̅ වේ ❭❭",
   "❤️ ❬❬ පත͢මු͜ මිනි͢ස්සුම͜ හ͢මු උ͜නු̅ දාට͢ ප්‍රේම͜ය හ͢රි සු͜න්දර͢ වෙයි ❭❭",
   "👊 ❬❬ ඔව්͜ මං̅ වෙ͢නයි̅ බං ම͢ගෙ ව͜ර්ගෙන්͢ එකයි̅ බං ❭❭",
@@ -43,8 +45,39 @@ const lifeQuotes = [
   "🫡 ❬❬ ක̅ව්රු͜ත් දා̅පු ව͜චන ͢තා̅මත් තිය͢න̅වා ඔලුවේ̅ ❭❭"
 ];
 
+const jsonPath = path.join(__dirname, "autobio.json");
 let bioUpdateInterval = null;
 
+// 🔹 Load current status from JSON
+const loadStatus = () => {
+  if (!fs.existsSync(jsonPath)) return { enabled: false };
+  const data = fs.readFileSync(jsonPath, "utf-8");
+  return JSON.parse(data);
+};
+
+// 🔹 Save status to JSON
+const saveStatus = (status) => fs.writeFileSync(jsonPath, JSON.stringify(status, null, 2));
+
+const updateBio = async (conn) => {
+  try {
+    const currentTime = moment().tz("Asia/Colombo").format("HH:mm:ss");
+    const quote = lifeQuotes[Math.floor(Math.random() * lifeQuotes.length)];
+    const newStatus = `✨📸 < | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️ 𝐈𝐬 𝐀ᴄᴛɪᴠᴇ 🟢 | ⏰ ${currentTime} 🇱🇰\n💬 ${quote}`;
+    await conn.updateProfileStatus(newStatus);
+    console.log("✅ Bio updated:", newStatus);
+  } catch (err) {
+    console.error("❌ Failed to update bio:", err.message);
+  }
+};
+
+// 🔹 Start auto bio interval
+const startAutoBio = (conn) => {
+  if (bioUpdateInterval) clearInterval(bioUpdateInterval);
+  bioUpdateInterval = setInterval(() => updateBio(conn), 60000);
+  updateBio(conn); // initial run
+};
+
+// 🔹 Command to toggle autobio
 cmd({
   pattern: "autobio",
   desc: "Enable or disable automatic bio updates with motivational (English + Sinhala) quotes and time.",
@@ -52,41 +85,29 @@ cmd({
   react: "🧬",
   use: ".autobio",
   filename: __filename,
-}, 
-async (conn, mek, m, { from, sender, reply, isOwner }) => {
+}, async (conn, mek, m, { reply, isOwner }) => {
 
-  // 🔒 Block command if AUTO_BIO is disabled in config
-  if (config.AUTO_BIO.toLowerCase() !== "true") {
-    return reply("❌ Auto Bio system is disabled in config.");
-  }
+  if (!isOwner) return reply("⛔ Only the bot owner can use this command.");
+  if (config.AUTO_BIO.toLowerCase() !== "true") return reply("❌ Auto Bio system is disabled in config.");
 
-  // Optional: Owner-only check
-  if (!isOwner) {
-    return reply("⛔ Only the bot owner can use this command.");
-  }
+  const status = loadStatus();
 
-  // Function to update the bot's status bio
-  const updateBio = async () => {
-    try {
-      const currentTime = moment().tz("Asia/Colombo").format("HH:mm:ss");
-      const quote = lifeQuotes[Math.floor(Math.random() * lifeQuotes.length)];
-      const newStatus = `✨📸 < | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️ 𝐈𝐬 𝐀ᴄᴛɪᴠᴇ 🟢 | ⏰ ${currentTime} 🇱🇰\n💬 ${quote}`;
-
-      await conn.updateProfileStatus(newStatus);
-      console.log("✅ Bio updated:", newStatus);
-    } catch (err) {
-      console.error("❌ Failed to update bio:", err.message);
-    }
-  };
-
-  // Toggle logic
-  if (bioUpdateInterval) {
+  if (status.enabled) {
     clearInterval(bioUpdateInterval);
     bioUpdateInterval = null;
-    await reply("🛑 Auto bio updates have been stopped.");
+    saveStatus({ enabled: false });
+    return reply("🛑 Auto bio updates have been stopped.");
   } else {
-    await updateBio(); // Initial run
-    bioUpdateInterval = setInterval(updateBio, 60000); // every 1 minute
-    await reply("> ✅ Auto bio update enabled..!\n\n```Bot bio will update every 1 minute with current time and quotes (English + Sinhala).```");
+    saveStatus({ enabled: true });
+    startAutoBio(m.conn || m);
+    return reply("> ✅ Auto bio update enabled..\n\n```Bot bio will update every 1 minute with current time and quotes (English + Sinhala).```");
   }
 });
+
+// 🔹 Auto start if JSON has enabled=true
+cmd.ev?.on("connection.update", ({ connection }, conn) => {
+  const status = loadStatus();
+  if (connection === "open" && status.enabled) startAutoBio(conn);
+});
+
+module.exports = { startAutoBio };
