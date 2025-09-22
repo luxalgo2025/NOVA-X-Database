@@ -13,34 +13,30 @@ cmd({
         name: "𝙼𝚁.𝚂𝙰𝙽𝙳𝙴𝚂𝙷 𝙱𝙷𝙰𝚂𝙷𝙰𝙽𝙰",
         number: "94741259325",
         info: `
-*𝐎𝐖𝐍𝐄𝐑 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍*
+*𝐎ᴡɴᴇʀ 𝐈ɴꜰᴏʀᴍᴀᴛɪᴏɴ*
 
-👤 *Name:* Sandesh Bhashana
-📱 *Number:* +94 74 741 6478
-🌐 *Website:* https://sandesh-md.example
-💼 *Role:* Bot Developer & Owner
-✉️ *Email:* sandesh@example.com
-📍 *Location:* Sri Lanka
-📌 *Additional Info:* Always online, managing the bot and its plugins.
+👤 *Name:* _Sandesh Bhashana_
+📱 *Number:* _+94 74 125 9325_
+🌐 *Website:* _https://king-sandesh-md-ofc-web.pages.dev/_
+💼 *Role:* _Developer & Owner Of QJ_
+✉️ *Email:* _mrsandeshbhashana@gmail.com_
+📍 *Location:* _Sri Lanka,Matara_
 
-> *NOVA-X MD BOT*
+> *< | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️*
 `
       },
       {
         name: "𝙼𝚁.𝙿𝙰𝚃𝙷𝚄𝙼 𝙼𝙰𝙻𝚂𝙰𝚁𝙰",
         number: "94723975388",
         info: `
-*𝐎𝐖𝐍𝐄𝐑 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍*
+*𝐎ᴡɴᴇʀ 𝐈ɴꜰᴏʀᴍᴀᴛɪᴏɴ*
 
-👤 *Name:* Pathum Malsara
-📱 *Number:* +94 72 397 5388
-🌐 *Website:* https://pathum-md.example
-💼 *Role:* Co-Owner & Developer
-✉️ *Email:* pathum@example.com
-📍 *Location:* Sri Lanka
-📌 *Additional Info:* Oversees bot updates and development.
+👤 *Name:* _Pathum Malsara_
+📱 *Number:* _+94 72 397 5388_
+💼 *Role:* _Developer & Owner Of QJ_
+📍 *Location:* _Sri Lanka_
 
-> *NOVA-X MD BOT*
+> *< | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️*
 `
       }
     ];
@@ -50,7 +46,7 @@ cmd({
       const vcard = `BEGIN:VCARD
 VERSION:3.0
 FN:${contact.name}
-ORG:NOVA-X MD;
+ORG:QUEEN JUSMY MD;
 TEL;type=CELL;type=VOICE;waid=${contact.number}:${contact.number}
 END:VCARD`;
 
