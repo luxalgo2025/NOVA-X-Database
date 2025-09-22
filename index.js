@@ -36,10 +36,7 @@ const config = require('./settings')
 const qrcode = require('qrcode-terminal')
 const NodeCache = require('node-cache')
 const util = require('util')
-const { 
-  sms,
-  downloadMediaMessage 
-} = require('./lib/msg')
+const { sms, downloadMediaMessage, AntiDelete } = require('./lib')
 const axios = require('axios')
 const { File } = require('megajs')
 const { exec } = require('child_process');
@@ -182,6 +179,17 @@ conn.sendMessage(conn.user.id,{ text: up, contextInfo: {
 }
 })
 
+ //=============ANTI-DELETE DETECT=================
+
+  conn.ev.on('messages.update', async updates => {
+    for (const update of updates) {
+      if (update.update.message === null) {
+        console.log("Delete Detected:", JSON.stringify(update, null, 2));
+        await AntiDelete(conn, updates);
+      }
+    }
+  });
+  //============================== 
 
 
 conn.ev.on('creds.update', saveCreds)  
