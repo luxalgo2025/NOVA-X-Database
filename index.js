@@ -190,13 +190,12 @@ conn.sendMessage(conn.user.id,{ text: up, contextInfo: {
     }
   });
   //============================== 
-							  
-//============================== 
-const { startAutoBio } = require("./plugins/autobio"); // export function import
+
+const { startAutoBio } = require("./plugins/autobio");
 
 conn.ev.on("connection.update", (update) => {
   if (update.connection === "open" && config.AUTO_BIO.toLowerCase() === "true") {
-    startAutoBio(conn); // ✅ autobio auto-run
+    startAutoBio(conn);
   }
 });
 
