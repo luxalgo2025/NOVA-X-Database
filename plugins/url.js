@@ -3,6 +3,7 @@ const FormData = require('form-data');
 const fs = require('fs');
 const os = require('os');
 const path = require("path");
+const config = require('../settings');
 const { cmd, commands } = require("../lib/command");
 
 cmd({
@@ -56,16 +57,16 @@ cmd({
 
     // Determine media type for response
     let mediaType = 'File';
-    if (mimeType.includes('image')) mediaType = 'Image';
-    else if (mimeType.includes('video')) mediaType = 'Video';
-    else if (mimeType.includes('audio')) mediaType = 'Audio';
+    if (mimeType.includes('image')) mediaType = '𝐈ᴍᴀɢᴇ';
+    else if (mimeType.includes('video')) mediaType = '𝐕ɪᴅᴇᴏ';
+    else if (mimeType.includes('audio')) mediaType = '𝐀ᴜᴅɪᴏ';
 
     // Send response
     await reply(
       `*${mediaType} 𝐔ᴘʟᴏᴀᴅᴇᴅ 𝐒ᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ*\n\n` +
-      `*𝐒ɪᴢᴇ:* ${formatBytes(mediaBuffer.length)}\n` +
-      `*𝐔𝐑𝐋:* ${mediaUrl}\n\n` +
-      `> *© ᴘᴏᴡᴇʀᴇᴅ ʙʏ ɴᴏᴠᴀ-x-ᴍᴅ  💸*`
+      `*🧾 𝐒ɪᴢᴇ:* ${formatBytes(mediaBuffer.length)}\n` +
+      `*🔗 𝐔𝐑𝐋:* ${mediaUrl}\n\n` +
+      `${config.FOOTER}`
     );
 
   } catch (error) {
