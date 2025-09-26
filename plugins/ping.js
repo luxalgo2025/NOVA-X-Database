@@ -99,7 +99,11 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
             'ʟᴏᴀᴅɪɴɢ 《 ▬▬▬▬▬▬▬▬▬▬ 》100%,',
             `> 𝐑𝐞𝐬𝐩𝐨𝐧𝐬𝐞 𝐒𝐩𝐞𝐞𝐝 ${ping} 𝐦𝐬 ${reactionEmoji}`,
         ];
-    
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+        
         for (let i = 0; i < loadingStages.length; i++) {
             await conn.relayMessage(
                 from,
@@ -114,6 +118,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
                 },
                 {}
             );
+            await delay(2000); // 150ms delay → super fast look
         }
     } catch (e) {
         console.log(e);
