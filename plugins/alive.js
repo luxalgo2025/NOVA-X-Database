@@ -162,7 +162,7 @@ ${config.FOOTER}`;
                 forwardingScore: 1000,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363409414874042@newsletter',
+                    newsletterJid: '120363402220977044@newsletter',
                     newsletterName: '< | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️',
                     serverMessageId: 143
                 }
