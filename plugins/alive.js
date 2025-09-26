@@ -34,8 +34,7 @@ function numberToEmoji(str) {
         "6": "6️⃣",
         "7": "7️⃣",
         "8": "8️⃣",
-        "9": "9️⃣",
-        "-": "➖"
+        "9": "9️⃣"
     };
     return str.split("").map(c => nums[c] || c).join("");
 }
