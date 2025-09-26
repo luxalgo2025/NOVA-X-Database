@@ -155,7 +155,7 @@ ${config.FOOTER}`;
             buttons,
             headerType: 1,
             viewOnce: true,
-            image: { url: "https://files.catbox.moe/er0vnl.png" },
+            image: { url: config.ALIVE_IMG },
             caption: status,
             contextInfo: {
                 mentionedJid: [sender],
