@@ -65,6 +65,21 @@ cmd({
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
+        const reactionEmojis = ['🔥', '⚡', '🚀', '💨', '🎯', '🎉', '🌟', '💥', '🕐', '🔹'];
+        const textEmojis = ['💎', '🏆', '⚡️', '🚀', '🎶', '🌠', '🌀', '🔱', '🛡️', '✨'];
+
+        const reactionEmoji = reactionEmojis[Math.floor(Math.random() * reactionEmojis.length)];
+        let textEmoji = textEmojis[Math.floor(Math.random() * textEmojis.length)];
+
+        // Ensure reaction and text emojis are different
+        while (textEmoji === reactionEmoji) {
+            textEmoji = textEmojis[Math.floor(Math.random() * textEmojis.length)];
+        }
+
+        // Send reaction using conn.sendMessage()
+        await conn.sendMessage(from, {
+            react: { text: textEmoji, key: mek.key }
+        });
         const startTime = Date.now();
         const { key } = await conn.sendMessage(from, { text: '*𝙿𝙸𝙽𝙶𝙸𝙽𝙶 < | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️...*' });
         const endTime = Date.now();
@@ -82,7 +97,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
             'ʟᴏᴀᴅɪɴɢ 《 ▬▬▬▬▬▬▬▬▭▭ 》80%,',
             'ʟᴏᴀᴅɪɴɢ 《 ▬▬▬▬▬▬▬▬▬▭ 》90%,',
             'ʟᴏᴀᴅɪɴɢ 《 ▬▬▬▬▬▬▬▬▬▬ 》100%,',
-            `𝐑𝐞𝐬𝐩𝐨𝐧𝐬𝐞 𝐒𝐩𝐞𝐞𝐝 ${ping} 𝐦𝐬`,
+            `> 𝐑𝐞𝐬𝐩𝐨𝐧𝐬𝐞 𝐒𝐩𝐞𝐞𝐝 ${ping} 𝐦𝐬 ${reactionEmoji}`,
         ];
     
         for (let i = 0; i < loadingStages.length; i++) {
