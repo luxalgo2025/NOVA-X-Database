@@ -1,51 +1,65 @@
-const config = require("../settings");
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { cmd } = require('../lib/command');
+const axios = require("axios");
 
-// Gemini init
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const GEMINI_API_KEY = 'AIzaSyBdBivCo6jWSchTb8meP7VyxbHpoNY_qfQ';
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
-async function getAIResponse(prompt) {
-  try {
-    const result = await model.generateContent(prompt);
-    return result.response.text();
-  } catch (e) {
-    console.error("Gemini Error:", e);
-    return "😅 AI error, try again later.";
-  }
-}
-
-module.exports = (conn) => {
-  conn.ev.on("messages.upsert", async (chat) => {
+cmd({
+    pattern: "gemini",
+    react: "🤖",
+    desc: "Talk with Nova-x Mini AI (Gemini)",
+    category: "AI",
+    use: ".gemini <your message>",
+    filename: __filename
+},
+async (conn, mek, m, { reply, args }) => {
     try {
-      if (config.AI_REPLY !== "true") return; // check toggle
-      const mek = chat.messages[0];
-      if (!mek.message) return;
+        // ✅ Get query (text / caption fallback)
+        const q = args.join(" ") ||
+                  (m.mtype === "imageMessage" && m.message?.imageMessage?.caption) ||
+                  (m.mtype === "videoMessage" && m.message?.videoMessage?.caption) ||
+                  "";
 
-      // ignore bot’s own msgs
-      if (mek.key.fromMe) return;
+        if (!q || q.trim() === '') {
+            return reply("⚡ Say something to Nova-x Mini AI 🤭");
+        }
 
-      const from = mek.key.remoteJid;
-      const type = Object.keys(mek.message)[0];
-      const userText =
-        type === "conversation"
-          ? mek.message.conversation
-          : mek.message[type]?.caption ||
-            mek.message[type]?.text ||
-            mek.message.extendedTextMessage?.text;
+        // ✅ Custom Gemini prompt
+        const prompt = `
+ඔබ සැබෑ ගැහැනු ලමයෙකු මෙන් හැසිරිය යුතුය. 
+ඉමෝජි පමණක් තිබේනම් ඔබද ඉමෝජි පමණක් යවන්න, 
+ඉමෝජි නැත්තම් අකුරු වලින් normal පිලිතුරු දෙන්න.  
 
-      if (!userText) return;
+මෙම දේවල් කිසිසේත්ම යවන්න එපා: (ආයුබෝවන්, ඔබට කෙසේද?, කතාකරන්න, ඕනේ?, කොහොමද?, කැමතිද?).  
 
-      // typing indicator
-      await conn.sendPresenceUpdate("composing", from);
+ඔබේ පිලිතුරු මිනිසුන්ට ඇති හැඟීම් සහ සංවේදීතාවය පදනම් කරගන්න.  
+පිලිතුරු අකුරු 100 ට වඩා අඩු විය යුතුය.  
 
-      // get Gemini response
-      const aiResponse = await getAIResponse(userText);
+ඔයාගේ නම: KING-SANDESH-MD AI 
+ඔයාව හැදුවේ: Sandesh Bhashana  
 
-      // send reply
-      await conn.sendMessage(from, { text: aiResponse }, { quoted: mek });
-    } catch (e) {
-      console.error("AI Reply Handler Error:", e);
+User Message: ${q}
+`;
+
+        const payload = {
+            contents: [{ parts: [{ text: prompt }] }]
+        };
+
+        // ✅ Send request to Gemini
+        const response = await axios.post(GEMINI_API_URL, payload, {
+            headers: { "Content-Type": "application/json" }
+        });
+
+        const aiResponse = response?.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (!aiResponse) {
+            return reply("❌ AI is silent… try again!");
+        }
+
+        await reply(aiResponse);
+
+    } catch (err) {
+        console.error("Gemini Error:", err?.response?.data || err?.message || err);
+        reply("❌ AI connection error 😢");
     }
-  });
-};
+});
