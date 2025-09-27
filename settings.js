@@ -14,6 +14,7 @@ ALIVE_MSG: process.env.ALIVE_MSG || '👾 Ｗ𝙴𝙻𝙲𝙾𝙼𝙴 𝚃𝙾 <
 BOT_NAME: process.env.BOT_NAME || '< | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️',
 MODE: process.env.MODE === undefined ?"groups" : process.env.MODE,
 BUTTON: process.env.BUTTON || 'true',
+AI_REPLY: process.env.AI_REPLY || 'true',
 MENTION_REPLY: process.env.MENTION_REPLY || 'true',
 AUTO_REPLY: process.env.AUTO_REPLY || 'true',
 AUTO_VOICE: process.env.AUTO_VOICE || 'false',
