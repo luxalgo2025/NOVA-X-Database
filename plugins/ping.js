@@ -30,7 +30,7 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
         });
 
         const end = new Date().getTime();
-        const responseTime = (end - start) / 1000;
+        const responseTime = (end - start) / 250;
 
         const text = `> *< | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 𝐒ᴘᴇᴇᴅ: ${responseTime.toFixed(2)}ᴹˢ ${reactionEmoji}*`;
 
