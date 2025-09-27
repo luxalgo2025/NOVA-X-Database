@@ -1,7 +1,7 @@
 const { cmd } = require('../lib/command');
 const axios = require("axios");
 
-const GEMINI_API_KEY = 'YOUR_API_KEY_HERE'; 
+const GEMINI_API_KEY = 'AIzaSyBdBivCo6jWSchTb8meP7VyxbHpoNY_qfQ'; 
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 cmd({
