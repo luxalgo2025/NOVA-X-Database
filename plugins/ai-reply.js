@@ -18,24 +18,26 @@ async function getAIResponse(prompt) {
 module.exports = (conn) => {
   conn.ev.on("messages.upsert", async (chat) => {
     try {
-      if (!config.AI_REPLY) return; // Only if enabled
+      if (!config.AI_REPLY) return; // Only work if enabled
       const mek = chat.messages[0];
       if (!mek.message) return;
 
       const from = mek.key.remoteJid;
-      const isReply = mek.message?.extendedTextMessage?.contextInfo?.stanzaId;
+      const type = Object.keys(mek.message)[0];
 
-      // Trigger only if someone replies to bot's message
-      if (isReply) {
-        const botMessage = mek.message.extendedTextMessage.contextInfo.participant;
-        if (botMessage && botMessage.includes(conn.user.id.split(":")[0])) {
-          const userText = mek.message?.extendedTextMessage?.text || "";
-          if (!userText) return;
+      const userText =
+        type === "conversation"
+          ? mek.message.conversation
+          : mek.message[type]?.caption ||
+            mek.message[type]?.text ||
+            mek.message.extendedTextMessage?.text;
 
-          const aiResponse = await getAIResponse(userText);
-          await conn.sendMessage(from, { text: aiResponse }, { quoted: mek });
-        }
-      }
+      if (!userText) return;
+      if (mek.key.fromMe) return; // ignore bot’s own msgs
+
+      // get AI reply
+      const aiResponse = await getAIResponse(userText);
+      await conn.sendMessage(from, { text: aiResponse }, { quoted: mek });
     } catch (e) {
       console.error("AI Reply Error:", e);
     }
