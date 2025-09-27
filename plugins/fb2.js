@@ -1,58 +1,86 @@
-const { cmd } = require('../lib/command');
-const { fetchJson } = require('../lib/functions');
+const axios = require("axios");
+const cheerio = require('cheerio');
+const { cmd, commands } = require('../lib/command')
+const config = require('../settings');
+const {fetchJson} = require('../lib/functions');
 
 const api = `https://nethu-api-ashy.vercel.app`;
-
-let fbSession = {}; // session storage
 
 cmd({
   pattern: "facebook2",
   react: "🎥",
-  alias: ["fbb2", "fbvideo2", "fb2"],
+  alias: ["fbb", "fbvideo2", "fb2"],
   desc: "Download videos from Facebook",
   category: "download",
-  use: ".facebook <facebook_url>",
+  use: '.facebook <facebook_url>',
   filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async(conn, mek, m, {
+    from, prefix, q, reply
+}) => {
   try {
-    if (!q) return reply("🚩 Please give me a Facebook url");
+    if (!q) return reply("🚩 Please give me a facebook url");
 
     const fb = await fetchJson(`${api}/download/fbdown?url=${encodeURIComponent(q)}`);
-
+    
     if (!fb.result || (!fb.result.sd && !fb.result.hd)) {
       return reply("I couldn't find anything :(");
     }
 
-    // save session
-    fbSession[m.sender] = {
-      sd: fb.result.sd,
-      hd: fb.result.hd
-    };
+    let caption = `*🖥️ 𝐊ꜱᴍ𝐃 𝐅ᴀᴄᴇʙᴏᴏ𝐊 𝐃𝐋*
 
-    let caption = `*🖥️ KSMd Facebook DL*\n\n📝 TITLE : Facebook Video\n🔗 URL : ${q}\n\nSelect quality:\n1️⃣ SD Video\n2️⃣ HD Video\n\n➡️ Reply with number (1/2) or use the list below.`;
+📝 ＴＩＴＬＥ : 𝙵𝙰𝙲𝙴𝙱𝙾𝙾𝙺 𝚅𝙸𝙳𝙴𝙾
+🔗 ＵＲＬ : ${q}`;
 
-    // send list reply
-    let sections = [
-      {
-        title: "Choose Quality",
-        rows: []
+    // THUMBNAIL SEND
+    if (fb.result.thumb) {
+      if (config.BUTTON) {
+        // BUTTON REPLY
+        await conn.sendMessage(from, {
+          image: { url: fb.result.thumb },
+          caption : caption,
+          buttons: [
+            {buttonId: `fb_sd ${fb.result.sd}`, buttonText: {displayText: "📹 SD QUALITY"}, type: 1},
+            {buttonId: `fb_hd ${fb.result.hd}`, buttonText: {displayText: "🎞 HD QUALITY"}, type: 1}
+          ],
+          headerType: 4
+        }, { quoted: mek });
+      } else {
+        // NUMBER REPLY (LIST)
+        let sections = [
+          {
+            title: "🎬 Choose Quality",
+            rows: []
+          }
+        ];
+
+        if (fb.result.sd) {
+          sections[0].rows.push({
+            title: "📹 SD QUALITY",
+            rowId: `fb_sd ${fb.result.sd}`,
+            description: "Normal Quality Video"
+          });
+        }
+
+        if (fb.result.hd) {
+          sections[0].rows.push({
+            title: "🎞 HD QUALITY",
+            rowId: `fb_hd ${fb.result.hd}`,
+            description: "High Quality Video"
+          });
+        }
+
+        const listMessage = {
+          text: caption,
+          footer: "Select the quality you want 👇",
+          title: "Facebook Video Downloader",
+          buttonText: "📥 Download Options",
+          sections
+        };
+
+        await conn.sendMessage(from, listMessage, { quoted: mek });
       }
-    ];
-
-    if (fb.result.sd) {
-      sections[0].rows.push({ title: "SD Video", rowId: "fb_sd" });
     }
-    if (fb.result.hd) {
-      sections[0].rows.push({ title: "HD Video", rowId: "fb_hd" });
-    }
-
-    await conn.sendMessage(from, {
-      text: caption,
-      footer: "Select one option",
-      title: "Facebook Downloader",
-      buttonText: "📥 Choose Quality",
-      sections
-    }, { quoted: mek });
 
   } catch (err) {
     console.error(err);
@@ -60,53 +88,33 @@ cmd({
   }
 });
 
-// handler for number reply
+// =======================
+// HANDLERS FOR SD & HD
+// =======================
 cmd({
-  on: "message"
-}, async (conn, mek, m, { reply }) => {
-  if (!fbSession[m.sender]) return;
-  let choice = m.body.trim();
-
-  if (choice === "1" && fbSession[m.sender].sd) {
-    await reply("⬇️ Downloading *SD Video*...");
-    await conn.sendMessage(m.chat, {
-      video: { url: fbSession[m.sender].sd },
-      mimetype: "video/mp4",
-      caption: "✅ Here is your *SD video*"
-    }, { quoted: mek });
-    delete fbSession[m.sender];
-
-  } else if (choice === "2" && fbSession[m.sender].hd) {
-    await reply("⬇️ Downloading *HD Video*...");
-    await conn.sendMessage(m.chat, {
-      video: { url: fbSession[m.sender].hd },
-      mimetype: "video/mp4",
-      caption: "✅ Here is your *HD video*"
-    }, { quoted: mek });
-    delete fbSession[m.sender];
-  }
+  pattern: "fb_sd",
+  dontAddCommandList: true,
+  filename: __filename
+}, async (conn, mek, m, {from, args}) => {
+  const url = args[0];
+  if (!url) return;
+  await conn.sendMessage(from, {
+    video: { url },
+    mimetype: "video/mp4",
+    caption: "*SD QUALITY* ✅"
+  }, { quoted: mek });
 });
 
-// handler for list reply
 cmd({
-  on: "message"
-}, async (conn, mek, m) => {
-  if (!fbSession[m.sender]) return;
-  let selected = m.listResponseMessage?.singleSelectReply?.selectedRowId;
-
-  if (selected === "fb_sd" && fbSession[m.sender].sd) {
-    await conn.sendMessage(m.chat, {
-      video: { url: fbSession[m.sender].sd },
-      mimetype: "video/mp4",
-      caption: "✅ Here is your *SD video*"
-    }, { quoted: mek });
-    delete fbSession[m.sender];
-  } else if (selected === "fb_hd" && fbSession[m.sender].hd) {
-    await conn.sendMessage(m.chat, {
-      video: { url: fbSession[m.sender].hd },
-      mimetype: "video/mp4",
-      caption: "✅ Here is your *HD video*"
-    }, { quoted: mek });
-    delete fbSession[m.sender];
-  }
+  pattern: "fb_hd",
+  dontAddCommandList: true,
+  filename: __filename
+}, async (conn, mek, m, {from, args}) => {
+  const url = args[0];
+  if (!url) return;
+  await conn.sendMessage(from, {
+    video: { url },
+    mimetype: "video/mp4",
+    caption: "*HD QUALITY* ✅"
+  }, { quoted: mek });
 });
