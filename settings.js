@@ -10,7 +10,7 @@ MONGODB: process.env.MONGODB || "mongodb://mongo:hSKOyytRSHAikyAFUajcmkoJTEcgoBT
 PREFIX: process.env.PREFIX || '.',
 ALIVE_IMG: process.env.ALIVE_IMG || 'https://files.catbox.moe/xu4725.jpg',   
 FOOTER: process.env.FOOTER || '> *©卩ᴏᴡᴇʀᴇᴅ ʙʏ < | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️*',
-GEMINI_API_KEY: process.env.GEMINI_API_KEY || 'AIzaSyCUr0sN6NIyuQSsEN1cvGkw58Z4G8MOM3U'
+GEMINI_API_KEY: process.env.GEMINI_API_KEY || 'AIzaSyCUr0sN6NIyuQSsEN1cvGkw58Z4G8MOM3U',
 ALIVE_MSG: process.env.ALIVE_MSG || '👾 Ｗ𝙴𝙻𝙲𝙾𝙼𝙴 𝚃𝙾 < | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️',
 BOT_NAME: process.env.BOT_NAME || '< | 𝐐ᴜᴇᴇɴ 𝐉ᴜꜱᴍʏ 𝐌ᴅ 🧚‍♀️',
 MODE: process.env.MODE === undefined ?"groups" : process.env.MODE,
