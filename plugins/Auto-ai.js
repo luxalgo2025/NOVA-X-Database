@@ -4,22 +4,20 @@ const axios = require("axios");
 const GEMINI_API_KEY = 'AIzaSyBdBivCo6jWSchTb8meP7VyxbHpoNY_qfQ';
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
-// --- Mention Detection without .gemini ---
 cmd({
-    on: "all", // ✅ all messages hook
+    on: "all", 
     filename: __filename
 },
-async (conn, mek, m, { reply, args }) => {
+async (conn, mek, m, { reply }) => {
     try {
-        const botNumber = conn.user?.id?.split(":")[0] + "@s.whatsapp.net";
+        // ✅ User message (any type: normal / reply / caption)
+        const q = m?.message?.conversation 
+               || m?.message?.extendedTextMessage?.text
+               || (m?.message?.imageMessage?.caption || "")
+               || (m?.message?.videoMessage?.caption || "")
+               || "";
 
-        // ✅ Detect mention
-        const mentioned = m?.message?.extendedTextMessage?.contextInfo?.mentionedJid || [];
-        if (!mentioned.includes(botNumber)) return; // bot mention unaoth witharai reply karanne
-
-        const q = m?.message?.extendedTextMessage?.text || "";
-
-        if (!q || q.trim() === '') return;
+        if (!q.trim()) return; // empty msg skip
 
         // --- Custom Prompt ---
         const prompt = `
@@ -45,12 +43,11 @@ User Message: ${q}
 
         const aiResponse = response?.data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-        if (!aiResponse) return reply("❌ AI is silent… try again!");
+        if (!aiResponse) return; // silent if no response
 
         await reply(aiResponse);
 
     } catch (err) {
         console.error("Gemini Error:", err?.response?.data || err?.message || err);
-        reply("❌ AI connection error 😢");
     }
 });
