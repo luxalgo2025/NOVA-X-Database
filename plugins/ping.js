@@ -118,7 +118,7 @@ function delay(ms) {
                 },
                 {}
             );
-            await delay(300); // 150ms delay → super fast look
+            await delay(350); // 150ms delay → super fast look
         }
     } catch (e) {
         console.log(e);
