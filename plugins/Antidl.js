@@ -1,3 +1,4 @@
+// plugins/antidelete.js
 const { isJidGroup } = require("@whiskeysockets/baileys");
 const config = require("../settings");
 
