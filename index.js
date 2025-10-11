@@ -139,11 +139,20 @@ conn.groupAcceptInvite(inviteCode);
    );
 	
             const path = require('path');
-            fs.readdirSync("./plugins/").forEach((plugin) => {
-                if (path.extname(plugin).toLowerCase() == ".js") {
-                    require("./plugins/" + plugin);
-                }
-            });
+    const fs = require('fs');
+
+    fs.readdirSync("./plugins/").forEach((plugin) => {
+        if (path.extname(plugin).toLowerCase() === ".js") {
+            const loaded = require("./plugins/" + plugin);
+
+            // Auto-register event if plugin exports event & handler
+            if (loaded.event && loaded.handler) {
+                conn.ev.on(loaded.event, async (mek) => {
+                    await loaded.handler(conn, mek);
+                });
+            }
+        }
+    });
             console.log('QUEEN-JUSMY-MD Plugins Installed 📂')
             console.log(' Bot connected ✅')
 	 
